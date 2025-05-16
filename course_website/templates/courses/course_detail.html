@@ -1,0 +1,21 @@
+{% extends 'courses/base.html' %}
+
+{% block title %}{{ course.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ course.title }}</h1>
+<p>{{ course.description }}</p>
+<p>Цена: {{ course.price }} руб.</p>
+
+{% if user.is_authenticated %}
+    {% if purchased %}
+        <div class="alert alert-success">Вы уже купили этот курс.</div>
+    {% else %}
+        <a href="{% url 'purchase_course' course.pk %}" class="btn btn-success">Купить курс</a>
+    {% endif %}
+{% else %}
+    <p><a href="{% url 'login' %}">Войдите</a>, чтобы купить курс.</p>
+{% endif %}
+{% endblock %}
+
+{% endblock %}
